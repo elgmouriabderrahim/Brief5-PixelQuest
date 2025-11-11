@@ -1,0 +1,17 @@
+
+:root {
+    --mainColor: #000;
+    --bordeColor: white;
+    --secondaryColor: #3a3a3ad4;
+    --thirdColor: #5D5A5A;
+}
+body {
+    background: var(--mainColor);
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    font-family: Sansation, Arial;
+}
+.sidebar {
+    width: 250px;
+}
