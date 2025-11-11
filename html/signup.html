@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../images/iconlogo.png">
+  <title>GamePro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Sansation&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../output.css">
+</head>
+<body class="bg-[url(../images/bg.png)] bg-cover bg-center">
+  <nav class="grid place-items-center fixed w-full left-0 bg-black z-10">
+    <div class="flex items-center justify-between w-[90%] h-16">
+        <a href="../index.html"><img src="../images/logo.png" alt="Logo" class="h-16 w-auto" /></a>
+        <div class="flex items-center gap-5">
+            <button class="hidden md:inline px-8  border border-gray-600 rounded-md hover:bg-neutral-900"><a href="signin.html">Sign In</a></button>
+            <button class="hidden md:inline px-8  border border-gray-600  rounded-md hover:bg-neutral-900"><a href="signup.html">Sign Up</a></button>
+            <button id="burger" class="md:hidden text-2xl p-2">☰</button>
+        </div>
+    </div>
+</nav>
+<main class="w-full pt-[80px] min-h-[calc(100vh-70px)] flex flex-col items-center gap-8 lg:flex-row-reverse lg:justify-evenly">
+      <div class="flex flex-col gap-4 items-center lg:gap-16">
+        <h1 class="text-2xl">GAMEPRO</h1>
+        <p>Create account and discover more games</p>
+      </div>
+      <form class="flex flex-col gap-8 items-center bg-[#C9C9C9] rounded-lg w-[90%] max-w-[500px] py-8 h-auto">
+        <div class="w-[90%] flex flex-col">
+            <label for="email" class="text-black">Email</label>
+            <input type="email" id="email" name="email" placeholder="email" class="rounded-md px-4  h-8 text-black outline-none">
+        </div>
+        <div class="w-[90%] flex flex-col">
+            <label for="username" class="text-black">Username</label>
+            <input type="text" id="username" name="username" placeholder="username" class="rounded-md px-4  h-8 text-black outline-none">
+        </div>
+        <div class="w-[90%] flex flex-col">
+            <label for="password" class="text-black">Password</label>
+            <input type="password" id="password" name="password" placeholder="password" class="rounded-md px-4  h-8 text-black outline-none">
+        </div>
+        <div class="w-[90%] flex flex-col">
+            <label for="cpassword" class="text-black">Confirm password</label>
+            <input type="password" id="cpassword" name="cpassword" placeholder="confirm your password" class="rounded-md px-4  h-8 text-black outline-none">
+        </div>
+        <button class="w-[90%] rounded-md h-8 text-white bg-[#2C2C2C]">Sign Up</button>
+        <a class="w-[90%] underline text-black" href="signin.html">Log In?</a>
+      </form>
+
+  </main>
+  <footer class="flex flex-col items-center bg-black">
+    <div class="flex"><span class="text-2xl">GamePro</span><img class="w-8 h-8" src="../images/logo.png" alt=""></div>
+    <p class="text-center text-sm opacity-70">© 2025 GamePro. Game data and media are the property of their respective publishers and developers. All rights reserved.</p>
+    <div>
+      <i class="fa-brands fa-facebook"></i>
+      <i class="fa-brands fa-linkedin-in"></i>
+      <i class="fa-brands fa-github"></i>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
