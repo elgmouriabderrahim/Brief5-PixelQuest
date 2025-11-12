@@ -37,21 +37,25 @@ function fetchdata(api){
             <img class="h-full w-full" src="${game.background_image}" alt="game">
             <span class="absolute right-0 bottom-0 -translate-x-1 -translate-y-2"><i class="fa-regular fa-heart text-3xl"></i></span>
           </div>
-          <div class="pb-8 md:pb-2 hover:h-auto w-[96%] h-[115px] relative flex flex-col self-center shadow-sm">
+          <div class="pb-8 lg:pb-2 lg:hover:h-auto w-[96%] h-[115px] relative flex flex-col self-center shadow-sm">
             <div class="flex flex-row justify-between">
               <h2 class="GameTitle text-xl w-[80%]">${game.name}</h2>
               <span class="gameplatforms m-2 space-x-0.5 flex"></span>
             </div>
             <p class="Description text-sm">${game.description.slice(0, 200) + " ..."}</p>
             <div class="my-1 w-full border-b border-neutral-700 flex justify-between text-xs">
-              <p class="text-white/50">release date:</p>
-              <p class="text-white">${game.released}</p>
+              <p class="text-white/50">Rating:</p>
+              <span>${game.rating}<i class="fa-solid fa-star-half-stroke text-yellow-500"></i></span>
+            </div>
+            <div class="my-1 w-full border-b border-neutral-700 flex justify-between text-xs">
+            <p class="text-white/50">release date:</p>
+            <p class="text-white">${game.released}</p>
             </div>
             <div class="my-1 w-full border-b border-neutral-700 flex justify-between text-xs">
               <p class="text-white/50">Genres:</p>
               <p class="genre text-white"></p>
             </div>
-            <button class="md:hidden Showmorebtn self-center border bg-[#5D5A5A] border-white/30 rounded-full w-32 h-6 absolute bottom-2"><i class="fa-solid fa-angle-down"></i></button>
+            <button class="Showmorebtn lg:hidden self-center border bg-[#5D5A5A] border-white/30 rounded-full w-32 h-6 absolute bottom-2 z-10"><i class="fa-solid fa-angle-down"></i></button>
           </div>
         </div>`;
       cardscontainer.append(card);
@@ -92,14 +96,10 @@ function fetchdata(api){
       btn.addEventListener("click", () => {
         btn.parentNode.classList.toggle("h-[115px]");
         btn.parentNode.classList.toggle("h-auto");
-        if(btn.innerHTML == `<i class="fa-solid fa-angle-down"></i>`){
+        if(btn.innerHTML == `<i class="fa-solid fa-angle-down"></i>`)
           btn.innerHTML = `<i class="fa-solid fa-angle-up"></i>`;
-          btn.classList.add("opacity-50");
-        }
-        else{
+        else
           btn.innerHTML = `<i class="fa-solid fa-angle-down"></i>`;
-          btn.classList.remove("opacity-50");
-        }
       });
     });
   })
