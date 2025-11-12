@@ -1,154 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="images/iconlogo.png">
-  <title>GamePro</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://fonts.googleapis.com/css2?family=Sansation&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="output.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/iconlogo.png">
+    <title>GamePro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Sansation&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="output.css">
 </head>
+
 <body>
-  <nav class="grid place-items-center fixed w-full left-0 bg-black z-50">
-    <div class="flex items-center justify-between w-[90%] h-16">
-        <img src="images/logo.png" alt="Logo" class="h-16 w-auto"/>
-
-        <div class="flex-1 flex justify-center px-4">
-          <div class="relative w-[80%]">
-            <input
-            type="search"
-            placeholder="Search for games"
-            class="peer w-full bg-white border border-neutral-800 rounded-full pl-10 pr-4 py-2 text-sm text-black placeholder-gray-400 focus:outline-none"
-            />
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg peer-focus:text-zinc-700">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </span>
-          </div>
+    <nav class="grid place-items-center fixed w-full left-0 bg-black z-50">
+        <div class="flex items-center justify-between w-[90%] h-16"> <img src="images/logo.png" alt="Logo" class="h-16 w-auto" />
+            <div class="flex-1 flex justify-center px-4">
+                <div class="relative w-[80%]"> <input type="search" placeholder="Search for games" class="peer w-full bg-white border border-neutral-800 rounded-full pl-10 pr-4 py-2 text-sm text-black placeholder-gray-400 focus:outline-none" /> <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg peer-focus:text-zinc-700"> <i class="fa-solid fa-magnifying-glass"></i> </span> </div>
+            </div>
+            <div class="flex items-center gap-5"> <button class="hidden md:inline px-8 border border-gray-600 rounded-md hover:bg-neutral-900"><a href="html/signin.html">Sign In</a></button> <button class="hidden md:inline px-8 border border-gray-600 rounded-md hover:bg-neutral-900"><a href="html/signup.html">Sign Up</a></button> <button id="burger" class="md:hidden text-2xl p-2">☰</button> </div>
         </div>
-
-        <div class="flex items-center gap-5">
-        <button class="hidden md:inline px-8  border border-gray-600 rounded-md hover:bg-neutral-900"><a href="html/signin.html">Sign In</a></button>
-        <button class="hidden md:inline px-8  border border-gray-600  rounded-md hover:bg-neutral-900"><a href="html/signup.html">Sign Up</a></button>
-        <button id="burger" class="md:hidden text-2xl p-2">☰</button>
-      </div>
+    </nav>
+    <div class="flex pt-16 min-h-screen">
+        <aside id="sidebar" class="hidden md:block fixed top-16 left-0 w-[20%] min-h-auto md:h-screen bg-black overflow-y-auto p-4 z-20">
+            <div class="space-y-4">
+                <div> <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" onclick="toggleSection('discover')"> <span>Discover</span><span>▾</span> </button>
+                    <ul id="discover" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
+                        <li>Top Games</li>
+                        <li>Best of the Year</li>
+                        <li>All-Time Top 250</li>
+                        <li>Popular in 2024</li>
+                        <li>New Releases</li>
+                        <li>This Week</li>
+                        <li>Last 30 Days</li>
+                        <li>This Year</li>
+                        <li>Next Week</li>
+                    </ul>
+                </div>
+                <div> <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" onclick="toggleSection('categories')"> <span>Categories</span><span>▾</span> </button>
+                    <ul id="categories" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
+                        <li>Free Online Games</li>
+                        <li>Action</li>
+                        <li>Strategy</li>
+                        <li>RPG</li>
+                        <li>Shooter</li>
+                        <li>More Genres...</li>
+                    </ul>
+                </div>
+                <div> <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" onclick="toggleSection('platforms')"> <span>Platforms</span><span>▾</span> </button>
+                    <ul id="platforms" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
+                        <li>PC</li>
+                        <li>PlayStation 4</li>
+                        <li>Xbox One</li>
+                        <li>iOS</li>
+                        <li>Android</li>
+                    </ul>
+                </div>
+                <div> <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" onclick="toggleSection('collections')"> <span>Collections</span><span>▾</span> </button>
+                    <ul id="collections" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
+                        <li>Favourites</li>
+                        <li>All Games</li>
+                        <li>Reviews</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <main class="md:ml-[20%] flex-1 overflow-y-auto px-4 md:px-8 py-8 h-[calc(100vh-4rem)] bg-[url('images/bg.png')] bg-cover bg-center">
+            <div class="text-center mb-6">
+                <h1 class="text-3xl font-bold">GAMEPRO The Most Trending Games</h1>
+                <p class="text-gray-300 mt-1 text-base">Find your favourite game right here and right now</p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between mb-10 gap-y-4"> <select class="bg-white text-black border border-neutral-700 rounded-lg px-4 py-2 w-full md:w-[23%] outline-none">
+                    <option>Type</option>
+                    <option>New Releases</option>
+                    <option>Trending</option>
+                    <option>Top Rated</option>
+                    <option>Free Online</option>
+                </select> <select class="bg-white text-black border border-neutral-700 rounded-lg px-4 py-2 w-full md:w-[23%] outline-none">
+                    <option>Platform</option>
+                    <option>PC</option>
+                    <option>PlayStation 4</option>
+                    <option>Xbox One</option>
+                    <option>iOS</option>
+                    <option>Android</option>
+                </select> <select class="bg-white text-black border border-neutral-700 rounded-lg px-4 py-2 w-full md:w-[23%] outline-none">
+                    <option>Rating</option>
+                    <option>5 Stars</option>
+                    <option>4+ Stars</option>
+                    <option>3+ Stars</option>
+                    <option>User Rated</option>
+                </select> <button class="bg-gray-600 hover:bg-gray-500 rounded-lg px-4 py-2 text-sm md:w-1/4">Reset Filters</button> </div>
+            <div id="cardscontainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"> </div>
+        </main>
     </div>
-  </nav>
-
-
-
-  <div class="flex pt-16 min-h-screen">
-    <aside id="sidebar"
-      class="hidden md:block fixed top-16 left-0 w-[20%] min-h-auto md:h-screen bg-black overflow-y-auto p-4 z-20">
-      
-      <div class="space-y-4">
-        <div>
-          <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border  border-gray-600"
-            onclick="toggleSection('discover')">
-            <span>Discover</span><span>▾</span>
-          </button>
-          <ul id="discover" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
-            <li>Top Games</li>
-            <li>Best of the Year</li>
-            <li>All-Time Top 250</li>
-            <li>Popular in 2024</li>
-            <li>New Releases</li>
-            <li>This Week</li>
-            <li>Last 30 Days</li>
-            <li>This Year</li>
-            <li>Next Week</li>
-          </ul>
-        </div>
-
-        <div>
-          <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600"
-            onclick="toggleSection('categories')">
-            <span>Categories</span><span>▾</span>
-          </button>
-          <ul id="categories" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
-            <li>Free Online Games</li>
-            <li>Action</li>
-            <li>Strategy</li>
-            <li>RPG</li>
-            <li>Shooter</li>
-            <li>More Genres...</li>
-          </ul>
-        </div>
-
-        <div>
-          <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600"
-            onclick="toggleSection('platforms')">
-            <span>Platforms</span><span>▾</span>
-          </button>
-          <ul id="platforms" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
-            <li>PC</li>
-            <li>PlayStation 4</li>
-            <li>Xbox One</li>
-            <li>iOS</li>
-            <li>Android</li>
-          </ul>
-        </div>
-
-        <div>
-          <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600"
-            onclick="toggleSection('collections')">
-            <span>Collections</span><span>▾</span>
-          </button>
-          <ul id="collections" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
-            <li>Favourites</li>
-            <li>All Games</li>
-            <li>Reviews</li>
-          </ul>
-        </div>
-      </div>
-    </aside>
-
-    <main class="md:ml-[20%] flex-1 overflow-y-auto px-4 md:px-8 py-8 h-[calc(100vh-4rem)] bg-[url('images/bg.png')] bg-cover bg-center">
-      <div class="text-center mb-6">
-        <h1 class="text-3xl font-bold">GAMEPRO The Most Trending Games</h1>
-        <p class="text-gray-300 mt-1 text-base">Find your favourite game right here and right now</p>
-      </div>
-
-      <div class="flex flex-col md:flex-row  justify-between mb-10 gap-y-4" >
-        <select class="bg-white text-black border border-neutral-700 rounded-lg px-4 py-2 w-full md:w-[23%] outline-none">
-          <option>Type</option>
-          <option>New Releases</option>
-          <option>Trending</option>
-          <option>Top Rated</option>
-          <option>Free Online</option>
-        </select>
-        <select class="bg-white text-black border border-neutral-700 rounded-lg px-4 py-2 w-full md:w-[23%] outline-none">
-          <option>Platform</option>
-          <option>PC</option>
-          <option>PlayStation 4</option>
-          <option>Xbox One</option>
-          <option>iOS</option>
-          <option>Android</option>
-        </select>
-        <select class="bg-white text-black border border-neutral-700 rounded-lg px-4 py-2 w-full md:w-[23%] outline-none">
-          <option>Rating</option>
-          <option>5 Stars</option>
-          <option>4+ Stars</option>
-          <option>3+ Stars</option>
-          <option>User Rated</option>
-        </select>
-        <button class="bg-gray-600 hover:bg-gray-500 rounded-lg px-4 py-2 text-sm md:w-1/4">Reset Filters</button>
-      </div>
-
-      <div id="cardscontainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      </div>
-    </main>
-  </div>
-  <footer class="flex flex-col items-center bg-black bottom-0 md:ml-[20%]">
-    <div class="flex"><span class="text-2xl">GamePro</span><img class="w-8 h-8" src="images/logo.png" alt=""></div>
-    <p class="text-center text-sm opacity-70">© 2025 GamePro. Game data and media are the property of their respective publishers and developers. All rights reserved.</p>
-    <div>
-      <i class="fa-brands fa-facebook"></i>
-      <i class="fa-brands fa-linkedin-in"></i>
-      <i class="fa-brands fa-github"></i>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+    <footer class="flex flex-col items-center bg-black bottom-0 md:ml-[20%]">
+        <div class="flex"><span class="text-2xl">GamePro</span><img class="w-8 h-8" src="images/logo.png" alt=""></div>
+        <p class="text-center text-sm opacity-70">&copy; 2025 GamePro. Game data and media are the property of their respective publishers and developers. All rights reserved.</p>
+        <div> <i class="fa-brands fa-facebook"></i> <i class="fa-brands fa-linkedin-in"></i> <i class="fa-brands fa-github"></i> </div>
+    </footer>
+    <script src="script.js"></script>
 </body>
+
 </html>
