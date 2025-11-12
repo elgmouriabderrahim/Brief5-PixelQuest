@@ -1,12 +1,16 @@
 const burger = document.getElementById('burger');
 const sidebar = document.getElementById('sidebar');
+
 const main = document.querySelector("main");
 const cardscontainer = document.querySelector("#cardscontainer");
-let savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
 
 const searchbar = document.querySelector("[type='search']");
 const magnifier = document.querySelector(".magnifier");
 
+const Genre = document.querySelector(".Genre");
+
+
+let savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
 burger.addEventListener('click', () => {
     sidebar.classList.toggle('hidden');
     sidebar.classList.toggle('left-0');
@@ -27,13 +31,22 @@ let page = 1;
 let limit = 20;
 let isLoading = false;
 
+
+
+let genreMatch;
+
 function fetchdata(api, serchedGame = "") {
     isLoading = true;
     fetch(api)
         .then(response => response.json())
         .then(data => {
             data.results.forEach(game => {
-                if (serchedGame == "" || game.name.toLocaleLowerCase().includes(serchedGame.toLowerCase())) {
+                match = false;
+                game.genres.forEach(genre => {
+                    if(genre.name == Genre.value)
+                        genreMatch = true;
+                })
+                if ((serchedGame == "" || game.name.toLocaleLowerCase().includes(serchedGame.toLowerCase())) && (Genre.value == "Genre" || genreMatch == true)) {
                   let card = document.createElement("div");
                   card.innerHTML = `
                           <div class="card flex flex-col w-full min-h-[300px] border rounded-2xl border-black overflow-hidden bg-[var(--secondaryColor)] transform transition-transform duration-200 ease-in hover:-translate-y-1 hover:scale-[1.03]">
@@ -179,9 +192,10 @@ window.addEventListener("scroll", () => {
 });
 fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=${page}&limit=${limit}`);
 
-searchbar.addEventListener("search", trigerSearch)
-magnifier.addEventListener("click", trigerSearch);
-function trigerSearch(){
+searchbar.addEventListener("search", triger);
+magnifier.addEventListener("click", triger);
+Genre.addEventListener("change", triger);
+function triger(){
     cardscontainer.innerHTML = "";
     page = 1;
     fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=${page}&limit=${limit}`, searchbar.value);
