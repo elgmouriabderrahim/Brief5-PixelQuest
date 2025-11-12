@@ -2,6 +2,7 @@ const burger = document.getElementById('burger');
 const sidebar = document.getElementById('sidebar');
 const main = document.querySelector("main");
 const cardscontainer = document.querySelector("#cardscontainer");
+let savedGames = [];
 
 burger.addEventListener('click', () =>{
   sidebar.classList.toggle('hidden');
@@ -30,19 +31,18 @@ function fetchdata(api){
   .then(data => {
     data.results.forEach(game => {
       let card = document.createElement("div");
-      console.log(game)
       card.innerHTML = `
         <div class="card flex flex-col w-full min-h-[300px] border rounded-lg border-black shadow-md overflow-hidden bg-[var(--secondaryColor)] transform transition-transform duration-200 ease-in hover:-translate-y-1 hover:scale-[1.03]">
           <div class="upperhalf w-full h-[200px] relative">
             <img class="h-full w-full" src="${game.background_image}" alt="game">
-            <span class="absolute right-0 bottom-0 -translate-x-1 -translate-y-2"><i class="fa-regular fa-heart text-3xl"></i></span>
+            <span class="absolute right-0 bottom-0 -translate-x-1 -translate-y-2"><i class="addFavBtn fa-regular fa-heart text-3xl transform transition-transform duration-100 ease-in hover:scale-110 hover:text-red-600"></i></span>
           </div>
-          <div class="pb-8 lg:pb-2 lg:hover:h-auto w-[96%] h-[115px] relative flex flex-col self-center shadow-sm">
+          <div class="pb-7 lg:pb-2 lg:hover:h-auto w-[96%] h-[115px] relative flex flex-col self-center shadow-sm">
             <div class="flex flex-row justify-between">
               <h2 class="GameTitle text-xl w-[80%]">${game.name}</h2>
               <span class="gameplatforms m-2 space-x-0.5 flex"></span>
             </div>
-            <p class="Description text-sm">${game.description.slice(0, 200) + " ..."}</p>
+            <p class="Description text-sm">${game.description.slice(0, 180) + " ..."}</p>
             <div class="my-1 w-full border-b border-neutral-700 flex justify-between text-xs">
               <p class="text-white/50">Rating:</p>
               <span>${game.rating}<i class="fa-solid fa-star-half-stroke text-yellow-500"></i></span>
@@ -55,7 +55,7 @@ function fetchdata(api){
               <p class="text-white/50">Genres:</p>
               <p class="genre text-white"></p>
             </div>
-            <button class="Showmorebtn lg:hidden self-center border bg-[#5D5A5A] border-white/30 rounded-full w-32 h-6 absolute bottom-2 z-10"><i class="fa-solid fa-angle-down"></i></button>
+            <button class="Showmorebtn lg:hidden self-center border bg-[#5D5A5A] border-white/30 rounded-full w-32 h-6 absolute bottom-1 z-10"><i class="fa-solid fa-angle-down"></i></button>
           </div>
         </div>`;
       cardscontainer.append(card);
@@ -102,6 +102,30 @@ function fetchdata(api){
           btn.innerHTML = `<i class="fa-solid fa-angle-down"></i>`;
       });
     });
+
+    //adding to favourites
+    const addFavBtns = document.querySelectorAll(".addFavBtn");
+    addFavBtns.forEach(e => {
+      e.addEventListener("click", () => {
+        if(e.classList.contains("font-bold")){
+          e.classList.remove("hover:text-red-600");
+        savedGames = JSON.parse(localStorage.getItem("savedGames"));
+        savedGames.splice(() => savedGames.index(e.parentNode.parentNode), 1);
+        localStorage.setItem("savedGames", JSON.stringify(savedGames));
+        }
+        else{
+          savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
+          savedGames.push(e.parentNode.parentNode);
+          localStorage.setItem("savedGames", JSON.stringify(savedGames));
+        }
+        e.classList.toggle("text-red-600");
+        e.classList.toggle("font-bold");
+        e.classList.toggle("scale-105");
+      })
+    })
+
+
+
   })
   .catch(error => console.log(error))
   .finally(() => isLoading = false);
@@ -111,6 +135,9 @@ function toggleSection(id) {
   document.getElementById(id).classList.toggle('hidden');
 }
 
+
+
+
 window.addEventListener("scroll", () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
   if (!isLoading && scrollTop + clientHeight >= scrollHeight - 10) {
@@ -118,5 +145,5 @@ window.addEventListener("scroll", () => {
     fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=${page}&limit=${limit}`);
   }
 });
-
 fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=${page}&limit=${limit}`);
+
