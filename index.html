@@ -45,43 +45,19 @@
         <!-- aside -->
         <aside id="sidebar" class="hidden md:block fixed top-16 left-0 w-[20%] min-h-auto md:h-screen bg-black overflow-y-auto p-4 z-20">
             <div class="space-y-4">
+                <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600">Home</button>
                 <div> <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" onclick="toggleSection('discover')"> <span>Discover</span><i class="fa-solid fa-angle-down"></i></button>
                     <ul id="discover" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
                         <li>Top Games</li>
-                        <li>Best of the Year</li>
-                        <li>All-Time Top 250</li>
-                        <li>Popular in 2024</li>
                         <li>New Releases</li>
-                        <li>This Week</li>
-                        <li>Last 30 Days</li>
                         <li>This Year</li>
-                        <li>Next Week</li>
                     </ul>
                 </div>
-                <div> <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" onclick="toggleSection('categories')"> <span>Categories</span><i class="fa-solid fa-angle-down"></i></button>
-                    <ul id="categories" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
-                        <li>Free Online Games</li>
-                        <li>Action</li>
-                        <li>Strategy</li>
-                        <li>RPG</li>
-                        <li>Shooter</li>
-                        <li>More Genres...</li>
-                    </ul>
-                </div>
-                <div> <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" onclick="toggleSection('platforms')"> <span>Platforms</span><i class="fa-solid fa-angle-down"></i></button>
-                    <ul id="platforms" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
-                        <li>PC</li>
-                        <li>PlayStation 4</li>
-                        <li>Xbox One</li>
-                        <li>iOS</li>
-                        <li>Android</li>
-                    </ul>
-                </div>
+                
                 <div> <button class="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" onclick="toggleSection('collections')"> <span>Collections</span><i class="fa-solid fa-angle-down"></i></button>
                     <ul id="collections" class="hidden mt-2 ml-3 space-y-1 text-sm text-gray-400">
                         <li>Favourites</li>
                         <li>All Games</li>
-                        <li>Reviews</li>
                     </ul>
                 </div>
             </div>
@@ -116,22 +92,23 @@
                 <select class="Platform bg-white text-black border border-neutral-700 rounded-lg px-4 py-2 w-full md:w-[23%] outline-none">
                     <option>Platform</option>
                     <option>PC</option>
-                    <option>MacOs</option>
+                    <option>macOS</option>
                     <option>Linux</option>
                     <option>Nintendo</option>
-                    <option>Psp</option>
+                    <option>PS Vita</option>
                     <option>PlayStation</option>
                     <option>Xbox</option>
-                    <option>Wii</option>
+                    <option>Wii U</option>
                     <option>iOS</option>
                     <option>Android</option>
                 </select> <select class="Ratings bg-white text-black border border-neutral-700 rounded-lg px-4 py-2 w-full md:w-[23%] outline-none">
                     <option>Ratings</option>
-                    <option>ascendent</option>
+                    <option>Ascendent</option>
                     <option>Descendent</option>
                 </select>
-                <button class="bg-gray-600 hover:bg-gray-500 rounded-lg px-4 py-2 text-sm md:w-1/4">Reset Filters</button> </div>
-            <div id="cardscontainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <button value="no" class="ResetFilters bg-gray-600 hover:bg-gray-500 rounded-lg px-4 py-2 text-sm md:w-1/4">Reset Filters</button>
+            </div>
+            <div id="cardscontainer" class="w-full min-h-[50vh] grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-center justify-items-center">
             </div>
         </main>
     </div>

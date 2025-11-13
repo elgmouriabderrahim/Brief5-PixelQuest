@@ -8,8 +8,11 @@ const searchbar = document.querySelector("[type='search']");
 const magnifier = document.querySelector(".magnifier");
 
 const Genre = document.querySelector(".Genre");
+const Platform = document.querySelector(".Platform");
+const Ratings = document.querySelector(".Ratings");
+const ResetFilters = document.querySelector(".ResetFilters");
 
-
+cardscontainer.innerHTML = `<img class="w-8 h-8 col-span-full" src="images/spinner.gif" alt="spinner">`;
 let savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
 burger.addEventListener('click', () => {
     sidebar.classList.toggle('hidden');
@@ -34,19 +37,45 @@ let isLoading = false;
 
 
 let genreMatch;
+let platformMatch;
+let ratingMatch;
+let i = 0;
 
+
+let isReset = false;
 function fetchdata(api, serchedGame = "") {
     isLoading = true;
+    isReset = false;
     fetch(api)
         .then(response => response.json())
         .then(data => {
+            if(cardscontainer.innerHTML == `<img class="w-8 h-8 col-span-full" src="images/spinner.gif" alt="spinner">`)
+            cardscontainer.innerHTML = "";
             data.results.forEach(game => {
-                match = false;
+                if(isReset == true)
+                    return;
+                genreMatch = false;
                 game.genres.forEach(genre => {
                     if(genre.name == Genre.value)
                         genreMatch = true;
                 })
-                if ((serchedGame == "" || game.name.toLocaleLowerCase().includes(serchedGame.toLowerCase())) && (Genre.value == "Genre" || genreMatch == true)) {
+
+                platformMatch = false;
+                game.platforms.forEach(e => {
+                    if(e.platform.name.includes(Platform.value))
+                        platformMatch = true;
+                })
+
+                ratingMatch =false;
+                if(game.rating.toFixed(2) <= i.toFixed(2) && game.rating.toFixed(2) >= i.toFixed(2)-1)
+                    ratingMatch =true;
+                
+                if ((serchedGame == "" || game.name.toLocaleLowerCase().includes(serchedGame.toLowerCase())) &&
+                    (Genre.value == "Genre" || genreMatch == true) &&
+                    (Platform.value == "Platform" || platformMatch == true) &&
+                    (Ratings.value == "Ratings" || ratingMatch == true) &&
+                    (ResetFilters.value == "no")
+                ){
                   let card = document.createElement("div");
                   card.innerHTML = `
                           <div class="card flex flex-col w-full min-h-[300px] border rounded-2xl border-black overflow-hidden bg-[var(--secondaryColor)] transform transition-transform duration-200 ease-in hover:-translate-y-1 hover:scale-[1.03]">
@@ -130,7 +159,7 @@ function fetchdata(api, serchedGame = "") {
                       }
                   });
   
-                  const genres = card.querySelector(".genre");
+                  const genres = card.querySelector(".genre"); 
                   game.genres.forEach(e => {
                       const span = document.createElement("span");
                       span.innerText = e.name + ', ';
@@ -168,6 +197,20 @@ function fetchdata(api, serchedGame = "") {
                     e.classList.toggle("scale-105");
                 })
             })
+            
+            if(data.next != null && i != 0)
+                fetchdata(data.next);
+
+            if( Ratings.value === "Ascendent" && i<5 && data.next == null){
+                i += 1;
+                fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=1&limit=${limit}`);
+            }
+            
+            if(Ratings.value === "Descendent" && i>1 && data.next == null){
+                i -= 1;
+                fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=1&limit=${limit}`);
+            }
+            
             if(serchedGame != "" && data.next != null)
                 fetchdata(data.next, serchedGame);
         })
@@ -179,24 +222,48 @@ function toggleSection(id) {
     document.getElementById(id).classList.toggle('hidden');
 }
 
-window.addEventListener("scroll", () => {
-    const {
-        scrollTop,
-        scrollHeight,
-        clientHeight
-    } = document.documentElement;
-    if (!isLoading && scrollTop + clientHeight >= scrollHeight - 10) {
+main.addEventListener("scroll", () => {
+    const {scrollTop,scrollHeight,clientHeight} = document.documentElement;
+    if (!isLoading && scrollTop + clientHeight >= scrollHeight -10) {
         page++;
         fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=${page}&limit=${limit}`);
     }
 });
 fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=${page}&limit=${limit}`);
 
-searchbar.addEventListener("search", triger);
-magnifier.addEventListener("click", triger);
-Genre.addEventListener("change", triger);
-function triger(){
-    cardscontainer.innerHTML = "";
+searchbar.addEventListener("search", trigger);
+magnifier.addEventListener("click", trigger);
+
+Genre.addEventListener("change", trigger);
+Platform.addEventListener("change", trigger);
+Ratings.addEventListener("change", trigger);
+ResetFilters.addEventListener("click", () => {
+    if(Platform.value != "Platform" || Genre.value != "Genre" || Ratings.value != "Ratings"){
+        isReset = true;
+        Genre.value = "Genre";
+        Platform.value = "Platform";
+        Ratings.value = "Ratings";
+        trigger();
+    }
+})
+function trigger(){
+    if(Ratings.value == "Ascendent")
+        i=1;
+    else if(Ratings.value == "Descendent")
+        i=5;
+    else
+        i=0;
+    cardscontainer.innerHTML = `<img class="w-8 h-8 col-span-full" src="images/spinner.gif" alt="spinner">`;
     page = 1;
     fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=${page}&limit=${limit}`, searchbar.value);
 }
+
+
+
+
+
+
+
+
+
+
