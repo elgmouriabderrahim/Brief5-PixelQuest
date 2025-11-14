@@ -40,7 +40,7 @@ else{
                                 </div>
                               </div>`;
                       cardscontainer.append(card);
-                      let gameplatforms = card.querySelector(".gameplatforms");
+                      const gameplatforms = card.querySelector(".gameplatforms");
                       game.platforms.forEach((platform, index) => {
                           if (index < 5) {
                               switch (platform.platform.name) {
@@ -112,16 +112,11 @@ else{
                         //remove from favourites
                         const removebtn = card.querySelector(".removeBtn");
                             removebtn.addEventListener("click", e => {
-                                console.log(e)
                                 savedGames.splice(savedGames.indexOf(e.id), 1);
                                 localStorage.setItem("savedGames", JSON.stringify(savedGames));
-                                i = 0;
-                                cardscontainer.innerHTML = "";
+                                card.remove();
                                 if(savedGames.length == 0)
-                                    cardscontainer.innerHTML += `<div class="w-full flex justify-center col-span-full"><img class=" h-[250px]" src="/images/nosaved.png" alt="no item found"></div>`;
-                                else
-                                    while(i<savedGames.length)
-                                        fetchdata();
+                                    cardscontainer.innerHTML = `<div class="w-full flex justify-center col-span-full"><img class=" h-[250px]" src="/images/nosaved.png" alt="no item found"></div>`;
                             })
                 
             })

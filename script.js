@@ -82,7 +82,7 @@ function fetchdata(api, serchedGame = "") {
                     (ResetFilters.value == "no") &&
                     (israted == false || (game.rating >=4 && game.rating <=5))
                 ){
-                  let card = document.createElement("div");
+                  const card = document.createElement("div");
                   card.innerHTML = `
                           <div class="card flex flex-col w-full min-h-[300px] border rounded-2xl border-black overflow-hidden bg-[var(--secondaryColor)] transform transition-transform duration-400 ease-in hover:-translate-y-1 hover:scale-[1.03] ">
                             <div class="upperhalf w-full h-[200px] relative">
@@ -172,38 +172,34 @@ function fetchdata(api, serchedGame = "") {
                       span.innerText = e.name + ', ';
                       genres.append(span);
                   });
+                  const Showmorebtn = card.querySelector(".Showmorebtn");
+                      Showmorebtn.addEventListener("click", () => {
+                          Showmorebtn.parentNode.classList.toggle("h-[115px]");
+                          Showmorebtn.parentNode.classList.toggle("h-auto");
+                          if (Showmorebtn.innerHTML == `<i class="fa-solid fa-angle-down"></i>`)
+                              Showmorebtn.innerHTML = `<i class="fa-solid fa-angle-up"></i>`;
+                          else
+                              Showmorebtn.innerHTML = `<i class="fa-solid fa-angle-down"></i>`;
+                  });
+                  //adding to favourites
+                  const addFavBtn = card.querySelector(".addFavBtn");
+                  addFavBtn.addEventListener("click", () => {
+                      if (addFavBtn.classList.contains("font-bold")) {
+                          addFavBtn.classList.remove("hover:text-red-600");
+                          savedGames.splice(savedGames.indexOf(addFavBtn.id), 1);
+                          localStorage.setItem("savedGames", JSON.stringify(savedGames));
+                      } else {
+                          savedGames.push(addFavBtn.id);
+                          localStorage.setItem("savedGames", JSON.stringify(savedGames));
+                      }
+                      addFavBtn.classList.toggle("text-red-600");
+                      addFavBtn.classList.toggle("font-bold");
+                      addFavBtn.classList.toggle("scale-105");
+                  })
                 }
             });
 
-            let Showmorebtn = document.querySelectorAll(".Showmorebtn");
-            Showmorebtn.forEach(btn => {
-                btn.addEventListener("click", () => {
-                    btn.parentNode.classList.toggle("h-[115px]");
-                    btn.parentNode.classList.toggle("h-auto");
-                    if (btn.innerHTML == `<i class="fa-solid fa-angle-down"></i>`)
-                        btn.innerHTML = `<i class="fa-solid fa-angle-up"></i>`;
-                    else
-                        btn.innerHTML = `<i class="fa-solid fa-angle-down"></i>`;
-                });
-            });
 
-            //adding to favourites
-            const addFavBtns = document.querySelectorAll(".addFavBtn");
-            addFavBtns.forEach(e => {
-                e.addEventListener("click", () => {
-                    if (e.classList.contains("font-bold")) {
-                        e.classList.remove("hover:text-red-600");
-                        savedGames.splice(savedGames.indexOf(e.id), 1);
-                        localStorage.setItem("savedGames", JSON.stringify(savedGames));
-                    } else {
-                        savedGames.push(e.id);
-                        localStorage.setItem("savedGames", JSON.stringify(savedGames));
-                    }
-                    e.classList.toggle("text-red-600");
-                    e.classList.toggle("font-bold");
-                    e.classList.toggle("scale-105");
-                })
-            })
             
             if(data.next != null && i != 0)
                 fetchdata(data.next);
