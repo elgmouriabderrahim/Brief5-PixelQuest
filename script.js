@@ -75,7 +75,7 @@ function fetchdata(api, serchedGame = "") {
                 if(game.rating < i && game.rating >= i-1)
                     ratingMatch = true;
                 
-                if ((serchedGame == "" || game.name.toLocaleLowerCase().includes(serchedGame.toLocaleLowerCase())) &&
+                if ((serchedGame == "" || game.name.toLowerCase().includes(serchedGame.toLowerCase())) &&
                     (Genre.value == "Genre" || genreMatch == true) &&
                     (Platform.value == "Platform" || platformMatch == true) &&
                     (Ratings.value == "Ratings" || ratingMatch == true) &&
@@ -202,30 +202,30 @@ function fetchdata(api, serchedGame = "") {
 
             
             if(data.next != null && i != 0)
-                fetchdata(data.next);
+                fetchdata(data.next, serchedGame);
 
             if( Ratings.value === "Ascendent" && i<5 && data.next == null){
                 i += 1;
-                fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=1&limit=${limit}`);
+                fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=1&limit=${limit}`, serchedGame);
             }
             
             if(Ratings.value === "Descendent" && i>1 && data.next == null){
                 i -= 1;
-                fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=1&limit=${limit}`);
+                fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=1&limit=${limit}`, serchedGame);
             }
             
             if(serchedGame != "" && data.next != null)
                 fetchdata(data.next, serchedGame);
+            isLoading = false;
         })
         .catch(error => console.log(error))
-        .finally(() => isLoading = false);
 }
 
 
 
 main.addEventListener("scroll", () => {
     const {scrollTop,scrollHeight,clientHeight} = main;
-    if (!isLoading && scrollTop + clientHeight >= scrollHeight -10) {
+    if (searchbar.value == "" && !isLoading && scrollTop + clientHeight >= scrollHeight -10) {
         page++;
         fetchdata(`https://debuggers-games-api.duckdns.org/api/games?page=${page}&limit=${limit}`);
     }

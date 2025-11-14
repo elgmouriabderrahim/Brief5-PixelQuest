@@ -15,7 +15,7 @@ else{
                       card.innerHTML = `
                               <div class="card flex flex-col w-full min-h-[300px] border rounded-2xl border-black overflow-hidden bg-[var(--secondaryColor)] transform transition-transform duration-400 ease-in hover:-translate-y-1 hover:scale-[1.03] ">
                                 <div class="upperhalf w-full h-[200px] relative">
-                                  <a href="description.html?api=${game}"><img class="h-full w-full" src="${game.background_image}" alt="game"></a>
+                                  <a href="description.html?api=https://debuggers-games-api.duckdns.org/api/games/${game.id}"><img class="h-full w-full" src="${game.background_image}" alt="game"></a>
                                   <span class="absolute right-0 bottom-0 -translate-x-1 -translate-y-2"><i id="${game.id}" class="removeBtn fa-solid fa-trash text-3xl transform transition-transform duration-100 ease-in hover:scale-110 hover:text-red-600"></i></span>
                                 </div>
                                 <div class="pb-7 lg:pb-2 lg:hover:h-auto w-[96%] h-[115px] relative flex flex-col self-center shadow-sm">
@@ -101,12 +101,12 @@ else{
                       });
                       const Showmorebtn = card.querySelector(".Showmorebtn");
                         Showmorebtn.addEventListener("click", () => {
-                            btn.parentNode.classList.toggle("h-[115px]");
-                            btn.parentNode.classList.toggle("h-auto");
-                            if (btn.innerHTML == `<i class="fa-solid fa-angle-down"></i>`)
-                                btn.innerHTML = `<i class="fa-solid fa-angle-up"></i>`;
+                            Showmorebtn.parentNode.classList.toggle("h-[115px]");
+                            Showmorebtn.parentNode.classList.toggle("h-auto");
+                            if (Showmorebtn.innerHTML == `<i class="fa-solid fa-angle-down"></i>`)
+                                Showmorebtn.innerHTML = `<i class="fa-solid fa-angle-up"></i>`;
                             else
-                                btn.innerHTML = `<i class="fa-solid fa-angle-down"></i>`;
+                                Showmorebtn.innerHTML = `<i class="fa-solid fa-angle-down"></i>`;
                         });
         
                         //remove from favourites
