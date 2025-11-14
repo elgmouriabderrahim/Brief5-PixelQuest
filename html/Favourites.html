@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/iconlogo.png">
+    <title>GamePro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Sansation&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../output.css">
+</head>
+
+<body>
+<!-- navbar -->
+    <nav class="grid place-items-center fixed w-full left-0 bg-black z-50">
+        <div class="flex items-center justify-between w-[90%] h-16">
+            <!-- logo -->
+            <a href="../index.html"><img src="../images/logo.png" alt="Logo" class="h-16 w-auto" /></a>
+            <!-- search bar -->
+            <div class="flex-1 flex justify-center px-4">
+                <div class="relative w-[80%]">
+                    <input type="search" placeholder="Search for games" class="peer w-full bg-neutral-200 border border-neutral-800 rounded-full pl-10 pr-4 py-2 text-sm text-black placeholder-gray-400 focus:outline-none focus:bg-white"/>
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg peer-focus:text-zinc-700">
+                        <i class=" magnifier fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="flex items-center gap-5">
+                <button class="hidden md:inline px-8 border border-gray-600 rounded-md hover:bg-neutral-900">
+                    <a href="signin.html">Sign In</a>
+                </button>
+                <button class="hidden md:inline px-8 border border-gray-600 rounded-md hover:bg-neutral-900">
+                    <a href="signup.html">Sign Up</a>
+                </button>
+                <button id="burger" class="md:hidden text-2xl p-2">
+                    <img  class="w-8" src="../images/burgermenu.png" alt="burgermenu">
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- container -->
+     <div class=" pt-16 mainhead w-full h-[300px] lg:h-[400px]  bg-[url('../images/favbg.jpg')] bg-cover bg-center flex flex-col items-center justify-center">
+        <h1 class="text-xl font-bold [text-stroke:2px_black]">GAMEPRO The Most Trending Games</h1>
+        <p class="text-gray-300 mt-1 text-base">Find your favourite game right here and right now</p>
+     </div>
+    <div class="flex min-h-screen">
+        <!-- aside -->
+        <aside id="sidebar" class="hidden fixed top-16 left-0 w-[15%] min-h-fit md:h-screen bg-black overflow-y-auto p-4 z-20">
+            <div class="space-y-4">
+                <a href="../index.html" class="Home w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600">Home</a>
+                <a class="Favourites w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" href="#">Favourites</a>
+            </div>
+        </aside>
+        <!-- main -->
+        <main class="flex-1 overflow-y-auto px-4 md:px-8 h-auto bg-[url('images/bg.png')] bg-cover bg-center">
+            <div id="cardscontainer" class="w-full py-16 min-h-[50vh] grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 justify-items-center">
+            </div>
+        </main>
+    </div>
+    <footer class="sticky top-[100%] flex flex-col items-center bg-black bottom-0">
+        <div class="flex"><span class="text-2xl">GamePro</span><img class="w-8 h-8" src="../images/logo.png" alt="GamePro log"></div>
+        <p class="text-center text-sm opacity-70">&copy; 2025 GamePro. Game data and media are the property of their respective publishers and developers. All rights reserved.</p>
+        <div> <i class="fa-brands fa-facebook"></i> <i class="fa-brands fa-linkedin-in"></i> <i class="fa-brands fa-github"></i> </div>
+    </footer>
+    <script src="../favscript.js"></script>
+</body>
+</html>

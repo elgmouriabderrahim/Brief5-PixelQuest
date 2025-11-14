@@ -166,7 +166,7 @@ function fetchdata(api, serchedGame = "") {
                       }
                   });
   
-                  const genres = card.querySelector(".genre"); 
+                  const genres = card.querySelector(".genre");
                   game.genres.forEach(e => {
                       const span = document.createElement("span");
                       span.innerText = e.name + ', ';
@@ -225,9 +225,7 @@ function fetchdata(api, serchedGame = "") {
         .finally(() => isLoading = false);
 }
 
-function toggleSection(id) {
-    document.getElementById(id).classList.toggle('hidden');
-}
+
 
 main.addEventListener("scroll", () => {
     const {scrollTop,scrollHeight,clientHeight} = main;
