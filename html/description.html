@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/iconlogo.png">
+    <title>GamePro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Sansation&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../output.css">
+</head>
+
+<body>
+<!-- navbar -->
+    <nav class="grid place-items-center fixed w-full left-0 bg-black z-50">
+        <div class="flex items-center justify-between w-[90%] h-16">
+            <!-- logo -->
+            <a href="../index.html"><img src="../images/logo.png" alt="Logo" class="h-16 w-auto" /></a>
+            <!-- search bar -->
+            <div class="flex-1 flex justify-center px-4">
+                <div class="relative w-[80%]">
+                    <input type="search" placeholder="Search for games" class="peer w-full bg-neutral-200 border border-neutral-800 rounded-full pl-10 pr-4 py-2 text-sm text-black placeholder-gray-400 focus:outline-none focus:bg-white"/>
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg peer-focus:text-zinc-700">
+                        <i class=" magnifier fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="flex items-center gap-5">
+                <button class="hidden md:inline px-8 border border-gray-600 rounded-md hover:bg-neutral-900">
+                    <a href="signin.html">Sign In</a>
+                </button>
+                <button class="hidden md:inline px-8 border border-gray-600 rounded-md hover:bg-neutral-900">
+                    <a href="signup.html">Sign Up</a>
+                </button>
+                <button id="burger" class="md:hidden text-2xl p-2">
+                    <img  class="w-8" src="../images/burgermenu.png" alt="burgermenu">
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- container -->
+     <div class=" py-16 main w-full h-auto  bg-[url('images/bg.png')] bg-cover bg-center flex flex-col items-center gap-6">
+        <div class="flex flex-row justify-between w-[90%] lg:justify-start lg:gap-[5%] pt-8">
+            <h1 class=" title text-xl font-bold"></h1>
+            <i  class="addFavBtn fa-regular fa-heart text-3xl transform transition-transform duration-100 ease-in hover:scale-110 hover:text-red-600"></i>
+        </div>
+        <div class="lg:grid w-[90%]  grid-cols-[2fr,3fr]">
+            <div class="image order-2"></div>
+            <div class="description1 order-1 grid grid-cols-[1fr,3fr] gap-y-2">
+            </div>
+        </div>
+        <div class=" md:text-lg flex w-[90%] flex-col gap-2">
+            <span>Description:</span>
+            <p class=" description2"></p>
+        </div>
+     </div>
+    <div class="flex">
+        <!-- aside -->
+        <aside id="sidebar" class="hidden fixed top-16 left-0 w-[15%] min-h-fit md:h-screen bg-black overflow-y-auto p-4 z-20">
+            <div class="space-y-4">
+                <a href="../index.html" class="Home w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600">Home</a>
+                <a class="Favourites w-full flex justify-between items-center px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-gray-600" href="#">Favourites</a>
+            </div>
+        </aside>
+    </div>
+    <footer class="sticky top-[100%] flex flex-col items-center bg-black bottom-0">
+        <div class="flex"><span class="text-2xl">GamePro</span><img class="w-8 h-8" src="../images/logo.png" alt="GamePro log"></div>
+        <p class="text-center text-sm opacity-70">&copy; 2025 GamePro. Game data and media are the property of their respective publishers and developers. All rights reserved.</p>
+        <div> <i class="fa-brands fa-facebook"></i> <i class="fa-brands fa-linkedin-in"></i> <i class="fa-brands fa-github"></i> </div>
+    </footer>
+    <script>
+        const addFavBtn = document.querySelector(".addFavBtn");
+        const description1 = document.querySelector(".description1");
+        const description2 = document.querySelector(".description2");
+        const title = document.querySelector(".title");
+        const image = document.querySelector(".image")
+        let savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
+        const params = new URLSearchParams(window.location.search);
+        const api = params.get("api");
+        
+        fetch(api)
+        .then(response => response.json())
+        .then(game => {
+            console.log(game);
+            image.innerHTML = `<img class="rounded-2xl w-full" src="${game.background_image}">`;
+            title.innerHTML = game.name;
+            description1.innerHTML = `
+                <span>Platforms:</span>
+                <span class="gameplatforms flex py-1"></span>
+
+                <span>Genre:</span>
+                <span class="genre flex"></span>
+
+                <span>Rating:</span>
+                <span>${game.rating}<i class="fa-solid fa-star-half-stroke text-yellow-500"></i></span>
+
+                <span>Release Date:</span>
+                <span>${game.released}</span>
+
+                <span>Developers:</span>
+                <span class="developers"></span>
+
+                <span>Publishers:</span>
+                <span class="publishers"></span>
+
+                <span>ESRB Rating:</span>
+                <span>${game.esrb_rating.name}</span>
+
+                <span>Average Playtime:</span>
+                <span>${game.playtime}</span>
+
+                <span>Achievements</span>
+                <span>${game.achievements_count}</span>
+
+                <span>Players Added:</span>
+                <span>${game.added}</span>
+
+                <span>Website</span>
+                <span>${game.website}</span>
+
+                <span>Reddit:</span>
+                <span>${game.reddit_count}</span>
+
+                <span>Tags:</span>
+                <span class="tags"></span>
+
+                <span>Updated:</span>
+                <span>${game.updated}</span>`;
+                
+
+            description2.innerHTML = game.description;
+            addFavBtn.addEventListener("click", () => {
+                if (addFavBtn.classList.contains("font-bold")) {
+                    addFavBtn.classList.remove("hover:text-red-600");
+                    savedGames.splice(savedGames.indexOf(game.id), 1);
+                    localStorage.setItem("savedGames", JSON.stringify(savedGames));
+                } else {
+                    savedGames.push(game.id);
+                    localStorage.setItem("savedGames", JSON.stringify(savedGames));
+                }
+                addFavBtn.classList.toggle("text-red-600");
+                addFavBtn.classList.toggle("font-bold");
+                addFavBtn.classList.toggle("scale-105");
+            })
+
+            let gameplatforms = document.querySelector(".gameplatforms");
+            game.platforms.forEach((platform) => {
+                    switch (platform.platform.name) {
+                        case "PlayStation 3":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/playstation 3.png" alt="playstation"></img>`;
+                            break;
+                        case "PlayStation 4":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/playstation 4.png" alt="playstation"></img>`;
+                            break;
+                        case "PlayStation 5":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/playstation 5.png" alt="playstation"></img>`;
+                            break;
+                        case "PC":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/pc.png" alt="pc"></img>`;
+                            break;
+                        case "Xbox 360":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/xbox 360.png" alt="xbox 360"></img>`;
+                            break;
+                        case "Xbox One":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/xbox one.png" alt="xbox one"></img>`;
+                            break;
+                        case "Xbox Series S/X":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/xbox series SX.png" alt="Xbox Series SX"></img>`;
+                            break;
+                        case "Linux":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/linux.png" alt="linux"></img>`;
+                            break;
+                        case "macOS":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/macos.png" alt="macos"></img>`;
+                            break;
+                        case "iOS":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/ios.png" alt="ios"></img>`;
+                            break;
+                        case "Android":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/android.png" alt="android"></img>`;
+                            break;
+                        case "Nintendo Switch":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/nintendo switch.png" alt="nintendo"></img>`;
+                            break;
+                        case "Nintendo 3DS":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/nintendo 3DS.png" alt="nintendo 3DS"></img>`;
+                            break;
+                        case "PS Vita":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/psp.png" alt="psp"></img>`;
+                            break;
+                        case "Wii U":
+                            gameplatforms.innerHTML += `<img class="w-4 h-4" src="../images/platforms/wii.png" alt="wii"></img>`;
+                            break;
+                }
+            });
+            const genres = document.querySelector(".genre");
+            genres.innerText = game.genres.map(e => e.name).join(', ');
+
+            const developers = document.querySelector(".developers");
+            developers.innerText = game.developers.map(e => e.name).join(', ');
+
+            const publishers = document.querySelector(".publishers");
+            publishers.innerText = game.publishers.map(e => e.name).join(', ');
+
+            const tags = document.querySelector(".tags");
+            tags.innerText = game.tags.map(e => e.name).join(', ');
+
+
+        })
+        .catch(error => console.log(error))
+    </script>
+    </body>
+</html>
