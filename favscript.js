@@ -118,7 +118,7 @@ else{
                                 i = 0;
                                 cardscontainer.innerHTML = "";
                                 if(savedGames.length == 0)
-                                    cardscontainer.innerHTML += `<div class="w-full flex justify-center col-span-full"><img class="h-[50px]" src="/images/nosaved.png" alt="no item found"></div>`;
+                                    cardscontainer.innerHTML += `<div class="w-full flex justify-center col-span-full"><img class=" h-[250px]" src="/images/nosaved.png" alt="no item found"></div>`;
                                 else
                                     while(i<savedGames.length)
                                         fetchdata();
