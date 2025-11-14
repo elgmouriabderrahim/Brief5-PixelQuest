@@ -75,7 +75,7 @@ function fetchdata(api, serchedGame = "") {
                 if(game.rating < i && game.rating >= i-1)
                     ratingMatch = true;
                 
-                if ((serchedGame == "" || game.name.toLocaleLowerCase().includes(serchedGame.toLowerCase())) &&
+                if ((serchedGame == "" || game.name.toLocaleLowerCase().includes(serchedGame.toLocaleLowerCase())) &&
                     (Genre.value == "Genre" || genreMatch == true) &&
                     (Platform.value == "Platform" || platformMatch == true) &&
                     (Ratings.value == "Ratings" || ratingMatch == true) &&
